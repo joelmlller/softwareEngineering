@@ -1,0 +1,339 @@
+openapi: '3.0.0'
+info:
+  version: '1.0.0'
+  title: 'Return API'
+  description: >
+    The Return API is a vital component of the CU Sports system, designed to manage return requests for products or items purchased through the CU Sports website. This API empowers users to interact with various facets of the return process, providing extensive features for efficient management.
+
+    **Key API Endpoints:**
+    - **Get a List of Returns:** Retrieve a list of return requests with built-in support for pagination and filtering. This endpoint allows you to effectively manage and track return requests. You can filter results by page, page size, status, and order number, ensuring precise retrieval of return data. A successful response will include a JSON array of return objects.
+
+    - **Update Return Items:** Update items in a return request with ease. Provide a JSON object containing an array of return items that need modification. A successful response will provide the updated return request.
+
+    - **Delete a Specific Return:** Efficiently delete a specific return request by providing its unique identifier. A successful response (status 204) confirms the deletion of the return request.
+
+    - **Retrieve Return Instructions:** Access detailed instructions for completing a specific return. Provide the unique identifier (returnID) to receive instructions for a particular return. A successful response will furnish comprehensive instructions for a successful return process.
+
+    - **Retrieve Return Status:** Get the current status of a specific return request by providing its unique identifier (returnID). A successful response will provide the current status of the return request.
+
+    - **Retrieve Return Label:** Retrieve the label associated with a specific return request by providing its unique identifier (returnID). The label is essential for the return shipping process.
+
+    - **Submit Payment for Return Shipping:** Use this endpoint to submit payment for return shipping for a specific return request. Provide the unique identifier (returnID) in the path and include payment details in the request body.
+
+    **API Parameters:**
+    - The API provides parameters for pagination, filtering, and updates, ensuring precise control over return data. You can specify the page, page size, status, and order number to filter results effectively.
+
+    **API Responses:**
+    - The API uses conventional HTTP response codes, including success (2xx range), invalid request (4xx range), and server errors (5xx range). Each response includes specific details and guidance for handling different scenarios.
+
+    **Security:**
+    - Authentication to the API is performed via the 'X-Api-Key' header, using an API key. Security is paramount, and users should keep their API keys secure.
+
+    For detailed documentation, specific endpoints, and code examples, please refer to the official CU Sports [Return API Documentation](https://www.cusports.com/api/docs).
+
+servers:
+  - url: https://www.cusports.com/api
+
+paths:
+  /returns/{returnID}:
+    parameters:
+      - name: returnID
+        description: The unique identifier for a return
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/returnID'
+    get:
+      summary: Obtain information about a return from the unique returnID
+      responses:
+        '200':
+          description: Successfully retrieved a return
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Return'
+  
+    patch:
+      summary: Update items in a return request
+      description: |
+        Use this endpoint to update items in a return request. Provide a JSON object with an array of return items that need to be updated. A successful response will include the updated return request.
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                returnItems:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Item'
+      responses:
+        '200':
+          description: Successfully updated the return items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Return'
+        '400':
+          $ref: '#/components/responses/400Error'
+        '500':
+          $ref: '#/components/responses/500Error'
+    delete:
+      summary: Delete a specific return request
+      description: |
+        Use this endpoint to delete a specific return request by providing its unique identifier. A successful response (status 204) indicates the successful deletion of the return request.
+
+      responses:
+        '200':
+          description: Successfully deleted the return
+        '400':
+          $ref: '#/components/responses/400Error'
+        '500':
+          $ref: '#/components/responses/500Error'
+
+  /returns/{returnID}/instructions:
+    parameters:
+      - name: returnID
+        description: The unique identifier for a return
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/returnID'
+    get:
+      summary: Retrieve instructions for a specific return
+      description: |
+        Retrieve instructions for a specific return request. Provide the unique identifier (returnID) in the path to get the relevant instructions. A successful response will provide detailed instructions for completing the return.
+
+      responses:
+        '200':
+          description: Successfully retrieved instructions for the return
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Return/properties/returnInstruction'
+        '400':
+          $ref: '#/components/responses/400Error'
+        '500':
+          $ref: '#/components/responses/500Error'
+  /returns/{returnID}/status:
+    parameters:
+      - name: returnID
+        description: The unique identifier for a return
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/returnID'
+    get:
+      summary: Retrieve the status of a specific return
+      description: |
+        Retrieve the status of a specific return request by providing its unique identifier (returnID) in the path. A successful response will provide the current status of the return request.
+
+      responses:
+        '200':
+          description: Successfully retrieved the status of the return
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  returnStatus:
+                    $ref: '#/components/schemas/Return/properties/returnStatus'
+        '400':
+          $ref: '#/components/responses/400Error'
+        '500':
+          $ref: '#/components/responses/500Error'
+  /returns/{returnID}/label:
+    parameters:
+      - name: returnID
+        description: The unique identifier for a return
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/returnID'
+    get:
+      summary: Retrieve the label for a specific return
+      description: |
+        Retrieve the label for a specific return request by providing its unique identifier (returnID) in the path. The label is essential for the return shipping process.
+
+      responses:
+        '200':
+          description: Successfully retrieved the label for the return
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  returnLabels:
+                    $ref: '#/components/schemas/Return/properties/returnLabel'
+        '400':
+          $ref: '#/components/responses/400Error'
+        '500':
+          $ref: '#/components/responses/500Error'
+  /returns/{returnID}/payment:
+    parameters:
+      - name: returnID
+        description: The unique identifier for a return
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/returnID'
+    post:
+      summary: Submit payment for return shipping
+      description: |
+        Use this endpoint to submit payment for return shipping for a specific return request. Provide the unique identifier (returnID) in the path and the payment details in the request body.
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Return/properties/returnPaymentDetails'
+      responses:
+        '201':
+          description: Successfully processed payment
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  returnStatus:
+                    $ref: '#/components/schemas/Return/properties/returnPaymentDetails/paymentStatus'
+        '400':
+          $ref: '#/components/responses/400Error'
+        '500':
+          $ref: '#/components/responses/500Error'
+  /returns:
+     post:
+      summary: Submit a return request
+      description: |
+        This API endpoint allows users to submit a return request for a product or item. 
+        When a client sends a POST request to this endpoint, 
+        it should include a JSON payload representing the return details, 
+        such as the reason for the return, order information, and any additional relevant information.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Return'
+      responses:
+        '201':
+          description: Successfully created a new return
+        '400':
+          $ref: '#/components/responses/400Error'
+        '500':
+          $ref: '#/components/responses/500Error'
+
+components:
+  schemas:
+    returnID:
+      description: The unique identifier of a return
+      type: string
+    Return:
+      description: Information about a return request
+      type: object
+      required:
+        - returnID
+      properties:
+        returnID:
+          description: The unique identifier of the return request
+          $ref: '#/components/schemas/returnID'
+        orderNumber:
+          description: The order number associated with the return
+          type: string
+        returnItems:
+          description: List of items in the return request
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        returnStatus:
+          description: The current status of the return request
+          type: string
+        returnPaymentDetails:
+          description: Payment details for the return
+          $ref: '#/components/schemas/PaymentDetails'
+        returnLabel:
+          description: The label associated with the return request
+          type: string
+        returnAmount:
+          description: The total return amount
+          type: number
+        returnInstruction:
+          description: List of instructions for completing the return
+          type: array
+          items:
+            $ref: '#/components/schemas/Instruction'
+    Item:
+      description: Information about an item in a return request
+      type: object
+      properties:
+        itemID:
+          description: The unique identifier of the item
+          type: string
+        itemCount:
+          description: The quantity of the item in the return
+          type: integer
+        itemCost:
+          description: The cost of the item
+          type: number
+    Instruction:
+      description: Instructions for how to complete a return
+      type: object
+      properties:
+        instructionType:
+          description: The type of instruction (e.g., UPS, Fedex, USPS)
+          type: string
+          enum:
+            - UPS
+            - Fedex
+            - USPS
+        InstructionDetails:
+          description: Details of the specific instructions
+          type: string
+    PaymentDetails:
+      description: Details of payment for return shipping
+      type: object
+      properties:
+        paymentID:
+          description: The unique identifier of the payment
+          type: string
+        paymentMethod:
+          description: The payment method (e.g., credit card, debit card, paypal)
+          type: string
+          enum: [credit_card, debit_card, paypal]
+        paymentStatus:
+          description: The status of the payment (e.g., pending, confirmed, failed)
+          type: string
+          enum: [pending, confirmed, failed]
+        paymentAmount:
+          description: The total payment amount
+          type: number
+
+  responses:
+    400Error:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            type: object 
+            properties:
+              message:
+                type: string
+    500Error:
+      description: Unexpected error
+      content:
+        application/json:
+          schema:
+            type: object 
+            properties:
+              message:
+                type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+security:
+  - ApiKey: []
