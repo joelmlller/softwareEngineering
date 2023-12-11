@@ -1,0 +1,2258 @@
+{
+	"info": {
+		"_postman_id": "936b8e59-d932-44fb-8bbe-c572110330f9",
+		"name": "Team - Return Service API Sprint 4",
+		"description": "The Return API is a vital component of the CU Sports system, designed to manage return requests for products or items purchased through the CU Sports website. This API empowers users to interact with various facets of the return process, providing extensive features for efficient management.\n**Key API Endpoints:** - **Get a List of Returns:** Retrieve a list of return requests with built-in support for pagination and filtering. This endpoint allows you to effectively manage and track return requests. You can filter results by page, page size, status, and order number, ensuring precise retrieval of return data. A successful response will include a JSON array of return objects.\n- **Update Return Items:** Update items in a return request with ease. Provide a JSON object containing an array of return items that need modification. A successful response will provide the updated return request.\n- **Delete a Specific Return:** Efficiently delete a specific return request by providing its unique identifier. A successful response (status 204) confirms the deletion of the return request.\n- **Retrieve Return Instructions:** Access detailed instructions for completing a specific return. Provide the unique identifier (returnID) to receive instructions for a particular return. A successful response will furnish comprehensive instructions for a successful return process.\n- **Retrieve Return Status:** Get the current status of a specific return request by providing its unique identifier (returnID). A successful response will provide the current status of the return request.\n- **Retrieve Return Label:** Retrieve the label associated with a specific return request by providing its unique identifier (returnID). The label is essential for the return shipping process.\n- **Submit Payment for Return Shipping:** Use this endpoint to submit payment for return shipping for a specific return request. Provide the unique identifier (returnID) in the path and include payment details in the request body.\n**API Parameters:** - The API provides parameters for pagination, filtering, and updates, ensuring precise control over return data. You can specify the page, page size, status, and order number to filter results effectively.\n**API Responses:** - The API uses conventional HTTP response codes, including success (2xx range), invalid request (4xx range), and server errors (5xx range). Each response includes specific details and guidance for handling different scenarios.\n**Security:** - Authentication to the API is performed via the 'X-Api-Key' header, using an API key. Security is paramount, and users should keep their API keys secure.\nFor detailed documentation, specific endpoints, and code examples, please refer to the official CU Sports [Return API Documentation](https://www.cusports.com/api/docs).\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30095976"
+	},
+	"item": [
+		{
+			"name": "Abhishek",
+			"item": [
+				{
+					"name": "returns",
+					"item": [
+						{
+							"name": "{returnID}",
+							"item": [
+								{
+									"name": "instructions",
+									"item": [
+										{
+											"name": "Retrieve instructions for a specific return",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{AbhishekUrl}}/returns/:returnID/instructions",
+													"host": [
+														"{{AbhishekUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"instructions"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "668958",
+															"description": "(Required) The unique identifier for a return"
+														}
+													]
+												},
+												"description": "Retrieve instructions for a specific return request. Provide the unique identifier (returnID) in the path to get the relevant instructions. A successful response will provide detailed instructions for completing the return.\n"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "status",
+									"item": [
+										{
+											"name": "Retrieve the status of a specific return",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{AbhishekUrl}}/returns/:returnID/status",
+													"host": [
+														"{{AbhishekUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"status"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "668958",
+															"description": "(Required) The unique identifier for a return"
+														}
+													]
+												},
+												"description": "Retrieve the status of a specific return request by providing its unique identifier (returnID) in the path. A successful response will provide the current status of the return request.\n"
+											},
+											"response": []
+										},
+										{
+											"name": "Change Status",
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"returnStatus\": \"Complete\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{AbhishekUrl}}/returns/:returnID/status",
+													"host": [
+														"{{AbhishekUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"status"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "668958"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "label",
+									"item": [
+										{
+											"name": "Retrieve the label for a specific return",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{AbhishekUrl}}/returns/:returnID/label",
+													"host": [
+														"{{AbhishekUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"label"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "668958",
+															"description": "(Required) The unique identifier for a return"
+														}
+													]
+												},
+												"description": "Retrieve the label for a specific return request by providing its unique identifier (returnID) in the path. The label is essential for the return shipping process.\n"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "payment",
+									"item": [
+										{
+											"name": "Submit payment for return shipping",
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"paymentMethod\": \"Credit Card\",\n    \"paymentAmount\": \"3.5\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{AbhishekUrl}}/returns/:returnID/payment",
+													"host": [
+														"{{AbhishekUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"payment"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "793321",
+															"description": "(Required) The unique identifier for a return"
+														}
+													]
+												},
+												"description": "Use this endpoint to submit payment for return shipping for a specific return request. Provide the unique identifier (returnID) in the path and the payment details in the request body.\n"
+											},
+											"response": []
+										},
+										{
+											"name": "Get payment info",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{AbhishekUrl}}/returns/:returnID/payment",
+													"host": [
+														"{{AbhishekUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"payment"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "793321"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "items",
+									"item": [
+										{
+											"name": "Get return Items",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{AbhishekUrl}}/returns/:returnID/items",
+													"host": [
+														"{{AbhishekUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"items"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "919610"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Change items in return",
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"itemID\": \"222\",\n    \"itemCost\": \"1\",\n    \"itemCount\": \"2\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{AbhishekUrl}}/returns/:returnID/items",
+													"host": [
+														"{{AbhishekUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"items"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "837391"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Obtain information about a return from the unique returnID",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{AbhishekUrl}}/returns/:returnID",
+											"host": [
+												"{{AbhishekUrl}}"
+											],
+											"path": [
+												"returns",
+												":returnID"
+											],
+											"variable": [
+												{
+													"key": "returnID",
+													"value": "837391",
+													"description": "(Required) The unique identifier for a return"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete a specific return request",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{AbhishekUrl}}/returns/:returnID",
+											"host": [
+												"{{AbhishekUrl}}"
+											],
+											"path": [
+												"returns",
+												":returnID"
+											],
+											"variable": [
+												{
+													"key": "returnID",
+													"value": "1"
+												}
+											]
+										},
+										"description": "Use this endpoint to delete a specific return request by providing its unique identifier. A successful response (status 204) indicates the successful deletion of the return request.\n"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Submit a return request",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orderNumber\": \"1112\",\n    \"customerName\":\"Abhishek Kuriakose\",\n    \"returnItems\": {\n      \"itemID\": \"4595\",\n      \"itemCount\": \"2\",\n      \"itemCost\": \"25\"\n    }\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{AbhishekUrl}}/returns",
+									"host": [
+										"{{AbhishekUrl}}"
+									],
+									"path": [
+										"returns"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all returns",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{AbhishekUrl}}/returns",
+									"host": [
+										"{{AbhishekUrl}}"
+									],
+									"path": [
+										"returns"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all returns by Name",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{AbhishekUrl}}/returns?customerName=Abhishek Kuriakose",
+									"host": [
+										"{{AbhishekUrl}}"
+									],
+									"path": [
+										"returns"
+									],
+									"query": [
+										{
+											"key": "customerName",
+											"value": "Abhishek Kuriakose"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Joel",
+			"item": [
+				{
+					"name": "returns",
+					"item": [
+						{
+							"name": "{returnID}",
+							"item": [
+								{
+									"name": "instructions",
+									"item": [
+										{
+											"name": "Retrieve instructions for a specific return",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{JoelUrl}}/returns/:returnID/instructions",
+													"host": [
+														"{{JoelUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"instructions"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "668958",
+															"description": "(Required) The unique identifier for a return"
+														}
+													]
+												},
+												"description": "Retrieve instructions for a specific return request. Provide the unique identifier (returnID) in the path to get the relevant instructions. A successful response will provide detailed instructions for completing the return.\n"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "status",
+									"item": [
+										{
+											"name": "Retrieve the status of a specific return",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{JoelUrl}}/returns/:returnID/status",
+													"host": [
+														"{{JoelUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"status"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "668958",
+															"description": "(Required) The unique identifier for a return"
+														}
+													]
+												},
+												"description": "Retrieve the status of a specific return request by providing its unique identifier (returnID) in the path. A successful response will provide the current status of the return request.\n"
+											},
+											"response": []
+										},
+										{
+											"name": "Change Status",
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"returnStatus\": \"Complete\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{JoelUrl}}/returns/:returnID/status",
+													"host": [
+														"{{JoelUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"status"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "668958"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "label",
+									"item": [
+										{
+											"name": "Retrieve the label for a specific return",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{JoelUrl}}/returns/:returnID/label",
+													"host": [
+														"{{JoelUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"label"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "668958",
+															"description": "(Required) The unique identifier for a return"
+														}
+													]
+												},
+												"description": "Retrieve the label for a specific return request by providing its unique identifier (returnID) in the path. The label is essential for the return shipping process.\n"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "payment",
+									"item": [
+										{
+											"name": "Submit payment for return shipping",
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"paymentMethod\": \"Credit Card\",\n    \"paymentAmount\": \"3.5\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{JoelUrl}}/returns/:returnID/payment",
+													"host": [
+														"{{JoelUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"payment"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "793321",
+															"description": "(Required) The unique identifier for a return"
+														}
+													]
+												},
+												"description": "Use this endpoint to submit payment for return shipping for a specific return request. Provide the unique identifier (returnID) in the path and the payment details in the request body.\n"
+											},
+											"response": []
+										},
+										{
+											"name": "Get payment info",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{JoelUrl}}/returns/:returnID/payment",
+													"host": [
+														"{{JoelUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"payment"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "793321"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "items",
+									"item": [
+										{
+											"name": "Get return Items",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{JoelUrl}}/returns/:returnID/items",
+													"host": [
+														"{{JoelUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"items"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "837391"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Change items in return",
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"itemID\": \"222\",\n    \"itemCost\": \"1\",\n    \"itemCount\": \"2\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{JoelUrl}}/returns/:returnID/items",
+													"host": [
+														"{{JoelUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"items"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "837391"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Obtain information about a return from the unique returnID",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{JoelUrl}}/returns/:returnID",
+											"host": [
+												"{{JoelUrl}}"
+											],
+											"path": [
+												"returns",
+												":returnID"
+											],
+											"variable": [
+												{
+													"key": "returnID",
+													"value": "525284",
+													"description": "(Required) The unique identifier for a return"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete a specific return request",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{JoelUrl}}/returns/:returnID",
+											"host": [
+												"{{JoelUrl}}"
+											],
+											"path": [
+												"returns",
+												":returnID"
+											],
+											"variable": [
+												{
+													"key": "returnID",
+													"value": "793321"
+												}
+											]
+										},
+										"description": "Use this endpoint to delete a specific return request by providing its unique identifier. A successful response (status 204) indicates the successful deletion of the return request.\n"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Submit a return request",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orderNumber\": \"1112\",\n    \"customerName\":\"Joel Miller\",\n    \"returnItems\": {\n      \"itemID\": \"4595\",\n      \"itemCount\": \"2\",\n      \"itemCost\": \"25\"\n    }\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{JoelUrl}}/returns",
+									"host": [
+										"{{JoelUrl}}"
+									],
+									"path": [
+										"returns"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all returns",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{JoelUrl}}/returns",
+									"host": [
+										"{{JoelUrl}}"
+									],
+									"path": [
+										"returns"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all returns by Name",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{JoelUrl}}/returns?customerName=Joel Miller",
+									"host": [
+										"{{JoelUrl}}"
+									],
+									"path": [
+										"returns"
+									],
+									"query": [
+										{
+											"key": "customerName",
+											"value": "Joel Miller"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Jonathan",
+					"item": [
+						{
+							"name": "returns",
+							"item": [
+								{
+									"name": "{returnID}",
+									"item": [
+										{
+											"name": "instructions",
+											"item": [
+												{
+													"name": "Retrieve instructions for a specific return",
+													"request": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{JonathanUrl}}/returns/:returnID/instructions",
+															"host": [
+																"{{JonathanUrl}}"
+															],
+															"path": [
+																"returns",
+																":returnID",
+																"instructions"
+															],
+															"variable": [
+																{
+																	"key": "returnID",
+																	"value": "144589",
+																	"description": "(Required) The unique identifier for a return"
+																}
+															]
+														},
+														"description": "Retrieve instructions for a specific return request. Provide the unique identifier (returnID) in the path to get the relevant instructions. A successful response will provide detailed instructions for completing the return.\n"
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "status",
+											"item": [
+												{
+													"name": "Retrieve the status of a specific return",
+													"request": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{JonathanUrl}}/returns/:returnID/status",
+															"host": [
+																"{{JonathanUrl}}"
+															],
+															"path": [
+																"returns",
+																":returnID",
+																"status"
+															],
+															"variable": [
+																{
+																	"key": "returnID",
+																	"value": "144589",
+																	"description": "(Required) The unique identifier for a return"
+																}
+															]
+														},
+														"description": "Retrieve the status of a specific return request by providing its unique identifier (returnID) in the path. A successful response will provide the current status of the return request.\n"
+													},
+													"response": []
+												},
+												{
+													"name": "Change Status",
+													"request": {
+														"method": "PATCH",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"returnStatus\": \"Complete\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{JonathanUrl}}/returns/:returnID/status",
+															"host": [
+																"{{JonathanUrl}}"
+															],
+															"path": [
+																"returns",
+																":returnID",
+																"status"
+															],
+															"variable": [
+																{
+																	"key": "returnID",
+																	"value": "144589"
+																}
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "label",
+											"item": [
+												{
+													"name": "Retrieve the label for a specific return",
+													"request": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{JonathanUrl}}/returns/:returnID/label",
+															"host": [
+																"{{JonathanUrl}}"
+															],
+															"path": [
+																"returns",
+																":returnID",
+																"label"
+															],
+															"variable": [
+																{
+																	"key": "returnID",
+																	"value": "144589",
+																	"description": "(Required) The unique identifier for a return"
+																}
+															]
+														},
+														"description": "Retrieve the label for a specific return request by providing its unique identifier (returnID) in the path. The label is essential for the return shipping process.\n"
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "payment",
+											"item": [
+												{
+													"name": "Submit payment for return shipping",
+													"request": {
+														"method": "PATCH",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"paymentMethod\": \"Credit Card\",\n    \"paymentAmount\": \"3.5\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{JonathanUrl}}/returns/:returnID/payment",
+															"host": [
+																"{{JonathanUrl}}"
+															],
+															"path": [
+																"returns",
+																":returnID",
+																"payment"
+															],
+															"variable": [
+																{
+																	"key": "returnID",
+																	"value": "144589",
+																	"description": "(Required) The unique identifier for a return"
+																}
+															]
+														},
+														"description": "Use this endpoint to submit payment for return shipping for a specific return request. Provide the unique identifier (returnID) in the path and the payment details in the request body.\n"
+													},
+													"response": []
+												},
+												{
+													"name": "Get payment info",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{JonathanUrl}}/returns/:returnID/payment",
+															"host": [
+																"{{JonathanUrl}}"
+															],
+															"path": [
+																"returns",
+																":returnID",
+																"payment"
+															],
+															"variable": [
+																{
+																	"key": "returnID",
+																	"value": "144589"
+																}
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "items",
+											"item": [
+												{
+													"name": "Get return Items",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{JonathanUrl}}/returns/:returnID/items",
+															"host": [
+																"{{JonathanUrl}}"
+															],
+															"path": [
+																"returns",
+																":returnID",
+																"items"
+															],
+															"variable": [
+																{
+																	"key": "returnID",
+																	"value": "212050"
+																}
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Change items in return",
+													"request": {
+														"method": "PATCH",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"itemID\": \"111\",\n    \"itemCost\": \"1\",\n    \"itemCount\": \"1\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{JonathanUrl}}/returns/:returnID/items",
+															"host": [
+																"{{JonathanUrl}}"
+															],
+															"path": [
+																"returns",
+																":returnID",
+																"items"
+															],
+															"variable": [
+																{
+																	"key": "returnID",
+																	"value": "576802"
+																}
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "Obtain information about a return from the unique returnID",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{JonathanUrl}}/returns/:returnID",
+													"host": [
+														"{{JonathanUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "783725",
+															"description": "(Required) The unique identifier for a return"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Delete a specific return request",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{JonathanUrl}}/returns/:returnID",
+													"host": [
+														"{{JonathanUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "427808"
+														}
+													]
+												},
+												"description": "Use this endpoint to delete a specific return request by providing its unique identifier. A successful response (status 204) indicates the successful deletion of the return request.\n"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Submit a return request",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"orderNumber\": \"1112\",\n    \"customerName\":\"Jonathan Jones\",\n    \"returnItems\": {\n      \"itemID\": \"4595\",\n      \"itemCount\": \"2\",\n      \"itemCost\": \"25\"\n    }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{JonathanUrl}}/returns",
+											"host": [
+												"{{JonathanUrl}}"
+											],
+											"path": [
+												"returns"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get all returns",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{JonathanUrl}}/returns",
+											"host": [
+												"{{JonathanUrl}}"
+											],
+											"path": [
+												"returns"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get all returns by Name",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{JonathanUrl}}/returns?customerName=Jonathan Jones",
+											"host": [
+												"{{JonathanUrl}}"
+											],
+											"path": [
+												"returns"
+											],
+											"query": [
+												{
+													"key": "customerName",
+													"value": "Jonathan Jones"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Shail",
+			"item": [
+				{
+					"name": "returns",
+					"item": [
+						{
+							"name": "{returnID}",
+							"item": [
+								{
+									"name": "instructions",
+									"item": [
+										{
+											"name": "Retrieve instructions for a specific return",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{ShailUrl}}/returns/:returnID/instructions",
+													"host": [
+														"{{ShailUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"instructions"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "776609",
+															"description": "(Required) The unique identifier for a return"
+														}
+													]
+												},
+												"description": "Retrieve instructions for a specific return request. Provide the unique identifier (returnID) in the path to get the relevant instructions. A successful response will provide detailed instructions for completing the return.\n"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "status",
+									"item": [
+										{
+											"name": "Retrieve the status of a specific return",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{ShailUrl}}/returns/:returnID/status",
+													"host": [
+														"{{ShailUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"status"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "776609",
+															"description": "(Required) The unique identifier for a return"
+														}
+													]
+												},
+												"description": "Retrieve the status of a specific return request by providing its unique identifier (returnID) in the path. A successful response will provide the current status of the return request.\n"
+											},
+											"response": []
+										},
+										{
+											"name": "Change Status",
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"returnStatus\": \"Complete\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{ShailUrl}}/returns/:returnID/status",
+													"host": [
+														"{{ShailUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"status"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "776609"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "label",
+									"item": [
+										{
+											"name": "Retrieve the label for a specific return",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{ShailUrl}}/returns/:returnID/label",
+													"host": [
+														"{{ShailUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"label"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "776609",
+															"description": "(Required) The unique identifier for a return"
+														}
+													]
+												},
+												"description": "Retrieve the label for a specific return request by providing its unique identifier (returnID) in the path. The label is essential for the return shipping process.\n"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "payment",
+									"item": [
+										{
+											"name": "Submit payment for return shipping",
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"paymentMethod\": \"Credit Card\",\n    \"paymentAmount\": \"3.5\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{ShailUrl}}/returns/:returnID/payment",
+													"host": [
+														"{{ShailUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"payment"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "776609",
+															"description": "(Required) The unique identifier for a return"
+														}
+													]
+												},
+												"description": "Use this endpoint to submit payment for return shipping for a specific return request. Provide the unique identifier (returnID) in the path and the payment details in the request body.\n"
+											},
+											"response": []
+										},
+										{
+											"name": "Get payment info",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{ShailUrl}}/returns/:returnID/payment",
+													"host": [
+														"{{ShailUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"payment"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "776609"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "items",
+									"item": [
+										{
+											"name": "Get return Items",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{ShailUrl}}/returns/:returnID/items",
+													"host": [
+														"{{ShailUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"items"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "984014"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Change items in return",
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"itemID\": \"4596\",\n    \"itemCount\": \"2\",\n    \"itemCost\": \"50\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{ShailUrl}}/returns/:returnID/items",
+													"host": [
+														"{{ShailUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"items"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "984014"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Obtain information about a return from the unique returnID",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{ShailUrl}}/returns/:returnID",
+											"host": [
+												"{{ShailUrl}}"
+											],
+											"path": [
+												"returns",
+												":returnID"
+											],
+											"variable": [
+												{
+													"key": "returnID",
+													"value": "776609",
+													"description": "(Required) The unique identifier for a return"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete a specific return request",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{ShailUrl}}/returns/:returnID",
+											"host": [
+												"{{ShailUrl}}"
+											],
+											"path": [
+												"returns",
+												":returnID"
+											],
+											"variable": [
+												{
+													"key": "returnID",
+													"value": "268152"
+												}
+											]
+										},
+										"description": "Use this endpoint to delete a specific return request by providing its unique identifier. A successful response (status 204) indicates the successful deletion of the return request.\n"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Submit a return request",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orderNumber\": \"1112\",\n    \"customerName\":\"Shail Patel \",\n    \"returnItems\": {\n      \"itemID\": \"4595\",\n      \"itemCount\": \"2\",\n      \"itemCost\": \"25\"\n    }\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ShailUrl}}/returns",
+									"host": [
+										"{{ShailUrl}}"
+									],
+									"path": [
+										"returns"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all returns",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ShailUrl}}/returns",
+									"host": [
+										"{{ShailUrl}}"
+									],
+									"path": [
+										"returns"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all returns by Name",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ShailUrl}}/returns?customerName=Professor Taylor",
+									"host": [
+										"{{ShailUrl}}"
+									],
+									"path": [
+										"returns"
+									],
+									"query": [
+										{
+											"key": "customerName",
+											"value": "Professor Taylor"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Tien",
+			"item": [
+				{
+					"name": "returns",
+					"item": [
+						{
+							"name": "{returnID}",
+							"item": [
+								{
+									"name": "instructions",
+									"item": [
+										{
+											"name": "Retrieve instructions for a specific return",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{TienUrl}}/returns/:returnID/instructions",
+													"host": [
+														"{{TienUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"instructions"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "284886",
+															"description": "(Required) The unique identifier for a return"
+														}
+													]
+												},
+												"description": "Retrieve instructions for a specific return request. Provide the unique identifier (returnID) in the path to get the relevant instructions. A successful response will provide detailed instructions for completing the return.\n"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "status",
+									"item": [
+										{
+											"name": "Retrieve the status of a specific return",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{TienUrl}}/returns/:returnID/status",
+													"host": [
+														"{{TienUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"status"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "284886",
+															"description": "(Required) The unique identifier for a return"
+														}
+													]
+												},
+												"description": "Retrieve the status of a specific return request by providing its unique identifier (returnID) in the path. A successful response will provide the current status of the return request.\n"
+											},
+											"response": []
+										},
+										{
+											"name": "Change Status",
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"returnStatus\": \"Complete\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{TienUrl}}/returns/:returnID/status",
+													"host": [
+														"{{TienUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"status"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "284886"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "label",
+									"item": [
+										{
+											"name": "Retrieve the label for a specific return",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{TienUrl}}/returns/:returnID/label",
+													"host": [
+														"{{TienUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"label"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "327771",
+															"description": "(Required) The unique identifier for a return"
+														}
+													]
+												},
+												"description": "Retrieve the label for a specific return request by providing its unique identifier (returnID) in the path. The label is essential for the return shipping process.\n"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "payment",
+									"item": [
+										{
+											"name": "Submit payment for return shipping",
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"paymentMethod\": \"Credit Card\",\n    \"paymentAmount\": \"3.5\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{TienUrl}}/returns/:returnID/payment",
+													"host": [
+														"{{TienUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"payment"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "327771",
+															"description": "(Required) The unique identifier for a return"
+														}
+													]
+												},
+												"description": "Use this endpoint to submit payment for return shipping for a specific return request. Provide the unique identifier (returnID) in the path and the payment details in the request body.\n"
+											},
+											"response": []
+										},
+										{
+											"name": "Get payment info",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{TienUrl}}/returns/:returnID/payment",
+													"host": [
+														"{{TienUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"payment"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "327771"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "items",
+									"item": [
+										{
+											"name": "Get return Items",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{TienUrl}}/returns/:returnID/items",
+													"host": [
+														"{{TienUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"items"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "284886"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Change items in return",
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"itemID\": \"111\",\n    \"itemCost\": \"1\",\n    \"itemCount\": \"1\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{TienUrl}}/returns/:returnID/items",
+													"host": [
+														"{{TienUrl}}"
+													],
+													"path": [
+														"returns",
+														":returnID",
+														"items"
+													],
+													"variable": [
+														{
+															"key": "returnID",
+															"value": "284886"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Obtain information about a return from the unique returnID",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{TienUrl}}/returns/:returnID",
+											"host": [
+												"{{TienUrl}}"
+											],
+											"path": [
+												"returns",
+												":returnID"
+											],
+											"variable": [
+												{
+													"key": "returnID",
+													"value": "327771",
+													"description": "(Required) The unique identifier for a return"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete a specific return request",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{TienUrl}}/returns/:returnID",
+											"host": [
+												"{{TienUrl}}"
+											],
+											"path": [
+												"returns",
+												":returnID"
+											],
+											"variable": [
+												{
+													"key": "returnID",
+													"value": "327771"
+												}
+											]
+										},
+										"description": "Use this endpoint to delete a specific return request by providing its unique identifier. A successful response (status 204) indicates the successful deletion of the return request.\n"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Submit a return request",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orderNumber\": \"1112\",\n    \"customerName\":\"Shail Patel\",\n    \"returnItems\": {\n      \"itemID\": \"4595\",\n      \"itemCount\": \"2\",\n      \"itemCost\": \"25\"\n    }\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{TienUrl}}/returns",
+									"host": [
+										"{{TienUrl}}"
+									],
+									"path": [
+										"returns"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all returns",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{TienUrl}}/returns",
+									"host": [
+										"{{TienUrl}}"
+									],
+									"path": [
+										"returns"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all returns by Name",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{TienUrl}}/returns?customerName=Tien Nguyen",
+									"host": [
+										"{{TienUrl}}"
+									],
+									"path": [
+										"returns"
+									],
+									"query": [
+										{
+											"key": "customerName",
+											"value": "Tien Nguyen"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-Api-Key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{apiKey}}",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "AbhishekUrl",
+			"value": "https://9vdaen3s93.execute-api.us-east-1.amazonaws.com/dev",
+			"type": "string"
+		},
+		{
+			"key": "JoelUrl",
+			"value": "https://f1itimf7nl.execute-api.us-east-1.amazonaws.com/returnAPI",
+			"type": "string"
+		},
+		{
+			"key": "JonathanUrl",
+			"value": "https://jrlfopmud2.execute-api.us-east-1.amazonaws.com/ReturnAPI",
+			"type": "string"
+		},
+		{
+			"key": "ShailUrl",
+			"value": "https://azlx5npy1i.execute-api.us-east-1.amazonaws.com/ReturnAPI",
+			"type": "string"
+		},
+		{
+			"key": "TienUrl",
+			"value": "https://1qsra6s099.execute-api.us-east-1.amazonaws.com/ReturnAPI",
+			"type": "string"
+		}
+	]
+}
