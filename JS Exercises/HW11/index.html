@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Position Tracker</title>
+    <style>
+        .container {
+            width: 400px;
+            height: 300px;
+            border: 2px solid black;
+            position: relative;
+        }
+
+        .active {
+            background-color: rgb(0, 255, 225);
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="main-container">
+        <p id="output"></p>
+    </div>
+    <script>
+      
+    const container = document.getElementById("main-container");
+    const output = document.getElementById("output");
+
+    container.addEventListener("mouseover", () => {
+        container.classList.add("active");
+    });
+
+    container.addEventListener("mouseout", () => {
+        container.classList.remove("active");
+    });
+
+    container.addEventListener("mousemove", (e) => {
+        const x = e.clientX - container.getBoundingClientRect().left;
+        const y = e.clientY - container.getBoundingClientRect().top;
+
+        const message = `Mouse position: X = ${x}, Y = ${y}`;
+        output.textContent = message;
+    });
+    </script>
+</body>
+</html>
